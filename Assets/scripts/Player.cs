@@ -21,7 +21,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _isTripleShotActive = false;
     [SerializeField]
-    private bool _isSpeedBoostActive = false;
+    private bool _isSpeedBoostActive = false;   
+    [SerializeField]
+    private bool _isShieldActive = false;
+    [SerializeField]
+    private GameObject _shieldVisulizer;
+
+
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
@@ -89,6 +95,13 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if (_isShieldActive)
+        {
+            _isShieldActive = false;
+            _shieldVisulizer.SetActive(false);
+            return;
+        }
+
         _lives--;
         if (_lives < 1)
         {
@@ -111,6 +124,24 @@ public class Player : MonoBehaviour
         _isSpeedBoostActive = true;
         StartCoroutine(SpeedBoostPowerDownRoutine());
     }
+
+    public void ShieldsActive()
+    {
+        _isShieldActive = true;
+        _shieldVisulizer.SetActive(true);
+        StartCoroutine(ShieldsDeactiveRoutine());
+    }
+
+    IEnumerator ShieldsDeactiveRoutine()
+    {
+        while (_isShieldActive)
+        {
+            yield return new WaitForSeconds(5.0f);
+            _isShieldActive = false;
+            _shieldVisulizer.SetActive(false);
+        }
+    }
+
 
     IEnumerator TripleShotPowerDownRoutine()
     {
