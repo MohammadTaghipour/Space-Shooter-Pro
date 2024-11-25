@@ -34,7 +34,7 @@ Follow these steps to play or modify **Space Shooter Pro**.
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourUsername/SpaceShooterPro.git
+   git clone https://github.com/MohammadTaghipour/Space-Shooter-Pro.git
 
 2. Open the project in Unity:
 - Launch Unity Hub.
